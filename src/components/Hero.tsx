@@ -81,7 +81,7 @@ const Hero = () => {
           ))}
         </div>
 
-        {/* Hero Image */}
+        {/* Hero Image - Updated to fix text cutoff issues */}
         <div className="relative w-full max-w-5xl mx-auto rounded-xl overflow-hidden shadow-2xl animate-scale-in">
           <div className="aspect-[16/9] bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl overflow-hidden">
             <div className="absolute inset-0 flex items-center justify-center">
@@ -130,27 +130,27 @@ const Hero = () => {
             </div>
           </div>
           
-          {/* Floating Elements */}
-          <div className="absolute -right-12 top-1/4 glass p-4 rounded-lg shadow-lg border border-white/30 animate-float opacity-90">
-            <div className="flex items-center space-x-2">
-              <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center">
+          {/* Floating Elements - Fixed positioning and width to prevent text cutoff */}
+          <div className="absolute -right-4 md:right-4 top-1/4 glass p-4 rounded-lg shadow-lg border border-white/30 animate-float opacity-90 max-w-[200px] md:max-w-[240px] z-10 transform translate-x-0">
+            <div className="flex items-center space-x-3">
+              <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0">
                 <svg className="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                 </svg>
               </div>
-              <div className="text-sm">Problem verified!</div>
+              <div className="text-sm font-medium">Problem verified successfully</div>
             </div>
           </div>
           
-          <div className="absolute -left-8 bottom-1/3 glass p-4 rounded-lg shadow-lg border border-white/30 animate-float opacity-90" style={{ animationDelay: "1s" }}>
-            <div className="flex items-center space-x-2">
-              <div className="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center">
+          <div className="absolute -left-4 md:left-4 bottom-1/3 glass p-4 rounded-lg shadow-lg border border-white/30 animate-float opacity-90 max-w-[200px] md:max-w-[240px] z-10 transform translate-x-0" style={{ animationDelay: "1s" }}>
+            <div className="flex items-center space-x-3">
+              <div className="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0">
                 <svg className="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                 </svg>
               </div>
-              <div className="text-sm">10 test cases generated</div>
+              <div className="text-sm font-medium">10 test cases generated</div>
             </div>
           </div>
         </div>
