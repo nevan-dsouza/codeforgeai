@@ -15,7 +15,8 @@ const Hero = () => {
       parallaxElements.forEach((element) => {
         const speed = element.getAttribute('data-speed') || '0.1';
         const yPos = scrollPosition * parseFloat(speed);
-        element.style.transform = `translateY(${yPos}px)`;
+        // Fix: Cast the Element to HTMLElement to access the style property
+        (element as HTMLElement).style.transform = `translateY(${yPos}px)`;
       });
     };
     
