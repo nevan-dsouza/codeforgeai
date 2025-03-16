@@ -5,118 +5,10 @@ import {
   Code, 
   BrainCircuit, 
   Sparkles, 
-  ArrowRight,
-  Check,
-  X
+  ArrowRight
 } from 'lucide-react';
-import { cn } from '@/lib/utils';
-import { motion, AnimatePresence } from 'framer-motion';
-
-const AgentCard = ({ 
-  icon, 
-  title, 
-  description, 
-  isActive, 
-  onClick, 
-  position,
-  examples,
-  color
-}: { 
-  icon: React.ReactNode; 
-  title: string; 
-  description: string; 
-  isActive: boolean; 
-  onClick: () => void; 
-  position: number;
-  examples: string[];
-  color: string;
-}) => {
-  return (
-    <motion.div 
-      className={cn(
-        "relative p-6 rounded-xl transition-all duration-300 cursor-pointer overflow-hidden",
-        isActive 
-          ? "bg-white border-2 border-primary shadow-lg z-20" 
-          : "bg-white border border-border hover:border-primary/20 shadow-card"
-      )}
-      onClick={onClick}
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ 
-        duration: 0.4, 
-        delay: position * 0.1,
-        ease: "easeOut"
-      }}
-      layout
-      whileHover={!isActive ? { scale: 1.03, transition: { duration: 0.2 } } : {}}
-    >
-      <div 
-        className={cn(
-          "absolute -right-20 -top-20 w-40 h-40 rounded-full opacity-10 transition-all duration-500",
-          isActive ? "scale-150" : "scale-100"
-        )} 
-        style={{ backgroundColor: color }}
-      />
-      
-      <div className="absolute right-3 top-3 opacity-0 group-hover:opacity-100 transition-opacity z-10">
-        {isActive ? (
-          <X className="h-5 w-5 cursor-pointer hover:text-primary" onClick={(e) => {
-            e.stopPropagation();
-            onClick();
-          }} />
-        ) : (
-          <ArrowRight className="h-5 w-5 text-primary" />
-        )}
-      </div>
-      
-      <div 
-        className={cn(
-          "w-12 h-12 rounded-lg flex items-center justify-center mb-4 transition-all duration-300",
-          isActive ? `text-white` : "text-primary"
-        )}
-        style={{ backgroundColor: isActive ? color : `${color}20` }}
-      >
-        {icon}
-      </div>
-      
-      <h3 className="text-xl font-medium mb-2">{title}</h3>
-      <p className={cn(
-        "text-sm mb-4",
-        "text-muted-foreground"
-      )}>
-        {description}
-      </p>
-      
-      <AnimatePresence>
-        {isActive && (
-          <motion.div 
-            className="mt-4 pt-4 border-t border-border"
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.3 }}
-          >
-            <p className="text-sm font-medium mb-2">Examples:</p>
-            <ul className="space-y-2">
-              {examples.map((example, index) => (
-                <motion.li 
-                  key={index} 
-                  className="text-xs flex items-start"
-                  initial={{ opacity: 0, x: -10 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.3, delay: 0.1 + index * 0.05 }}
-                >
-                  <Check className="h-4 w-4 mr-2 flex-shrink-0 mt-0.5 text-primary" />
-                  <span>{example}</span>
-                </motion.li>
-              ))}
-            </ul>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </motion.div>
-  );
-};
+import { motion, AnimatePresence, LayoutGroup } from 'framer-motion';
+import AIAgentCard from './AIAgentCard';
 
 const AIAgents = () => {
   const [activeAgent, setActiveAgent] = useState<number | null>(null);
@@ -195,28 +87,38 @@ const AIAgents = () => {
           </p>
         </div>
         
-        <div 
-          className={cn(
-            "grid gap-6 mb-12 transition-all duration-500",
-            activeAgent !== null
-              ? "grid-cols-1 md:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 max-w-3xl mx-auto"
-              : "grid-cols-1 md:grid-cols-2 lg:grid-cols-4"
-          )}
-        >
-          {agents.map((agent, index) => (
-            <AgentCard
-              key={index}
-              icon={agent.icon}
-              title={agent.title}
-              description={agent.description}
-              isActive={activeAgent === index}
-              onClick={() => handleCardClick(index)}
-              position={index}
-              examples={agent.examples}
-              color={agent.color}
-            />
-          ))}
-        </div>
+        <LayoutGroup>
+          <motion.div 
+            className="grid gap-6 mb-12"
+            layout
+            transition={{ 
+              layout: { duration: 0.6, ease: "easeInOut" },
+              opacity: { duration: 0.3 }
+            }}
+            style={{
+              display: "grid",
+              gridTemplateColumns: activeAgent !== null
+                ? "repeat(auto-fill, minmax(300px, 1fr))"
+                : "repeat(auto-fill, minmax(280px, 1fr))",
+              maxWidth: activeAgent !== null ? "1200px" : "100%",
+              margin: "0 auto"
+            }}
+          >
+            {agents.map((agent, index) => (
+              <AIAgentCard
+                key={index}
+                icon={agent.icon}
+                title={agent.title}
+                description={agent.description}
+                isActive={activeAgent === index}
+                onClick={() => handleCardClick(index)}
+                position={index}
+                examples={agent.examples}
+                color={agent.color}
+              />
+            ))}
+          </motion.div>
+        </LayoutGroup>
         
         {/* Agent Flow Diagram - Only show when no agent is active */}
         <AnimatePresence>
@@ -224,9 +126,23 @@ const AIAgents = () => {
             <motion.div 
               className="mt-20 relative"
               initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.4 }}
+              animate={{ 
+                opacity: 1, 
+                y: 0,
+                transition: { 
+                  duration: 0.5, 
+                  delay: 0.2,
+                  ease: "easeOut" 
+                }
+              }}
+              exit={{ 
+                opacity: 0, 
+                y: -20,
+                transition: { 
+                  duration: 0.3,
+                  ease: "easeIn"
+                }
+              }}
             >
               <div className="absolute inset-0 flex items-center justify-center -z-10">
                 <div className="w-full max-w-4xl h-1.5 bg-gradient-to-r from-transparent via-primary/40 to-transparent rounded-full"></div>
@@ -237,20 +153,39 @@ const AIAgents = () => {
                   <React.Fragment key={index}>
                     <motion.div 
                       className="flex flex-col items-center cursor-pointer"
-                      whileHover={{ scale: 1.05 }}
+                      whileHover={{ 
+                        scale: 1.05,
+                        transition: { duration: 0.3 }
+                      }}
                       onClick={() => handleCardClick(index)}
                     >
-                      <div 
-                        className="w-14 h-14 rounded-full flex items-center justify-center mb-3 transition-colors duration-300 text-white"
+                      <motion.div 
+                        className="w-14 h-14 rounded-full flex items-center justify-center mb-3 text-white"
                         style={{ backgroundColor: agent.color }}
+                        whileHover={{ 
+                          boxShadow: "0 0 15px rgba(0,0,0,0.1)",
+                          transition: { duration: 0.3 }
+                        }}
                       >
                         <span className="text-sm font-bold">{index + 1}</span>
-                      </div>
+                      </motion.div>
                       <span className="text-xs font-medium text-center">{agent.title}</span>
                     </motion.div>
                     
                     {index < agents.length - 1 && (
-                      <ArrowRight className="hidden md:block text-primary/50 mb-6 animate-pulse" />
+                      <motion.div
+                        initial={{ opacity: 0.5 }}
+                        animate={{ 
+                          opacity: [0.5, 1, 0.5],
+                          transition: {
+                            duration: 2,
+                            repeat: Infinity,
+                            ease: "easeInOut"
+                          }
+                        }}
+                      >
+                        <ArrowRight className="hidden md:block text-primary/50 mb-6" />
+                      </motion.div>
                     )}
                   </React.Fragment>
                 ))}
