@@ -1,8 +1,9 @@
 
 import React from 'react';
-import { Check, X, ArrowRight } from 'lucide-react';
+import { Check, ChevronRight, X, ArrowRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Button } from '@/components/ui/button';
 
 interface AIAgentCardProps {
   icon: React.ReactNode;
@@ -11,7 +12,7 @@ interface AIAgentCardProps {
   isActive: boolean;
   onClick: () => void;
   position: number;
-  examples: string[];
+  details: string[];
   color: string;
 }
 
@@ -22,7 +23,7 @@ const AIAgentCard: React.FC<AIAgentCardProps> = ({
   isActive,
   onClick,
   position,
-  examples,
+  details,
   color
 }) => {
   return (
@@ -72,9 +73,7 @@ const AIAgentCard: React.FC<AIAgentCardProps> = ({
               onClick();
             }} 
           />
-        ) : (
-          <ArrowRight className="h-5 w-5 text-primary" />
-        )}
+        ) : null}
       </motion.div>
       
       <motion.div 
@@ -85,7 +84,7 @@ const AIAgentCard: React.FC<AIAgentCardProps> = ({
         layoutId={`agent-icon-${position}`}
         animate={{ 
           backgroundColor: isActive ? color : `${color}20`,
-          color: isActive ? "white" : "var(--primary)",
+          color: isActive ? "white" : color,
           transition: { duration: 0.5 }
         }}
       >
@@ -105,6 +104,24 @@ const AIAgentCard: React.FC<AIAgentCardProps> = ({
       >
         {description}
       </motion.p>
+      
+      {!isActive && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.3 }}
+        >
+          <Button 
+            variant="outline" 
+            size="sm" 
+            className="w-full group mt-2"
+          >
+            <span>More Details</span>
+            <ChevronRight className="h-4 w-4 ml-1 group-hover:translate-x-1 transition-transform" />
+          </Button>
+        </motion.div>
+      )}
       
       <AnimatePresence>
         {isActive && (
@@ -129,9 +146,9 @@ const AIAgentCard: React.FC<AIAgentCardProps> = ({
               }
             }}
           >
-            <p className="text-sm font-medium mb-2">Examples:</p>
+            <p className="text-sm font-medium mb-2">Details:</p>
             <ul className="space-y-2">
-              {examples.map((example, index) => (
+              {details.map((detail, index) => (
                 <motion.li 
                   key={index} 
                   className="text-xs flex items-start"
@@ -148,7 +165,7 @@ const AIAgentCard: React.FC<AIAgentCardProps> = ({
                   }}
                 >
                   <Check className="h-4 w-4 mr-2 flex-shrink-0 mt-0.5 text-primary" />
-                  <span>{example}</span>
+                  <span>{detail}</span>
                 </motion.li>
               ))}
             </ul>

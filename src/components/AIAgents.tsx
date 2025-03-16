@@ -23,7 +23,7 @@ const AIAgents = () => {
       title: "Problem Setter",
       description: "Generates clear, engaging problem statements with precise requirements and solutions.",
       color: "#8B5CF6", // Vivid purple
-      examples: [
+      details: [
         "Generates problem descriptions with clarity and specificity",
         "Creates sample inputs and outputs for validation",
         "Sets appropriate difficulty levels based on target audience",
@@ -35,7 +35,7 @@ const AIAgents = () => {
       title: "Test Case Generator",
       description: "Creates comprehensive test cases covering all edge cases and potential solution paths.",
       color: "#0EA5E9", // Ocean blue
-      examples: [
+      details: [
         "Identifies edge cases based on static analysis",
         "Generates minimum and maximum input value tests",
         "Creates tests for boundary conditions and exception handling",
@@ -47,7 +47,7 @@ const AIAgents = () => {
       title: "Automated Solver",
       description: "Validates problems by solving them using multiple approaches and algorithms.",
       color: "#F97316", // Bright orange
-      examples: [
+      details: [
         "Implements multiple solution approaches automatically",
         "Verifies solutions against all test cases",
         "Analyzes time and space complexity of solutions",
@@ -59,7 +59,7 @@ const AIAgents = () => {
       title: "Critiquer",
       description: "Evaluates and refines problems for clarity, difficulty, and educational value.",
       color: "#D946EF", // Magenta pink
-      examples: [
+      details: [
         "Assesses problem quality and educational value",
         "Provides feedback on clarity and ambiguity",
         "Suggests improvements to problem statements",
@@ -98,9 +98,9 @@ const AIAgents = () => {
             style={{
               display: "grid",
               gridTemplateColumns: activeAgent !== null
-                ? "repeat(auto-fill, minmax(300px, 1fr))"
-                : "repeat(auto-fill, minmax(280px, 1fr))",
-              maxWidth: activeAgent !== null ? "1200px" : "100%",
+                ? "1fr"
+                : "repeat(4, 1fr)",
+              maxWidth: "100%",
               margin: "0 auto"
             }}
           >
@@ -113,7 +113,7 @@ const AIAgents = () => {
                 isActive={activeAgent === index}
                 onClick={() => handleCardClick(index)}
                 position={index}
-                examples={agent.examples}
+                details={agent.details}
                 color={agent.color}
               />
             ))}

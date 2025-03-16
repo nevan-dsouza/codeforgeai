@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { 
@@ -12,7 +11,8 @@ import {
   Lightbulb,
   CheckCircle2,
   Terminal,
-  ArrowLeft
+  ArrowLeft,
+  Star
 } from 'lucide-react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { cn } from '@/lib/utils';
@@ -193,6 +193,22 @@ Recommendations:
     }
   ];
   
+  const renderQualityStars = (score: number) => {
+    return (
+      <div className="flex">
+        {[...Array(5)].map((_, i) => (
+          <Star
+            key={i}
+            size={16}
+            className={`${
+              i < score ? 'text-yellow-400 fill-yellow-400' : 'text-gray-300'
+            } mr-0.5`}
+          />
+        ))}
+      </div>
+    );
+  };
+  
   return (
     <section className="py-20 px-6 md:px-12 bg-gradient-to-b from-white to-blue-50">
       <div className="max-w-7xl mx-auto">
@@ -207,7 +223,6 @@ Recommendations:
         </div>
         
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
-          {/* Steps sidebar */}
           <div className="lg:col-span-3 space-y-4">
             {demoSteps.map((step, index) => (
               <div 
@@ -253,10 +268,8 @@ Recommendations:
             </Button>
           </div>
           
-          {/* Demo content - CodeEditor-like interface */}
           <div className="lg:col-span-9">
             <div className="bg-[#151a2d] rounded-xl overflow-hidden border border-[#272e48] shadow-xl">
-              {/* Problem Header */}
               <div className="bg-[#1e2436] text-white px-6 py-4 flex items-center justify-between">
                 <div className="flex items-center">
                   <ArrowLeft className="h-5 w-5 mr-4 text-slate-400" />
@@ -276,9 +289,7 @@ Recommendations:
                 </div>
               </div>
               
-              {/* Content Area */}
               <div className="flex flex-col md:flex-row min-h-[600px]">
-                {/* Left Panel - Problem Description */}
                 <div className="w-full md:w-1/2 border-r border-[#272e48]">
                   <div className="bg-[#1e2436] border-b border-[#272e48] px-2">
                     <Tabs value={activeProblemTab} className="w-full">
@@ -409,16 +420,7 @@ Recommendations:
                                   <div key={key} className="p-3 bg-[#1d2335] rounded-md">
                                     <div className="flex justify-between items-center mb-1">
                                       <span className="text-sm capitalize">{key}:</span>
-                                      <div className="flex">
-                                        {[...Array(5)].map((_, i) => (
-                                          <div
-                                            key={i}
-                                            className={`w-4 h-4 rounded-full mx-0.5 ${
-                                              i < value.score ? 'bg-green-500' : 'bg-[#2d3345]'
-                                            }`}
-                                          />
-                                        ))}
-                                      </div>
+                                      {renderQualityStars(value.score)}
                                     </div>
                                     <p className="text-xs text-slate-400">{value.comment}</p>
                                   </div>
@@ -440,7 +442,6 @@ Recommendations:
                   </div>
                 </div>
                 
-                {/* Right Panel - Code Editor */}
                 <div className="w-full md:w-1/2 flex flex-col">
                   <div className="bg-[#1e2436] border-b border-[#272e48] flex items-center justify-between px-4 py-2">
                     <span className="text-slate-300 text-sm">Code Editor</span>
@@ -486,7 +487,6 @@ Recommendations:
                 </div>
               </div>
               
-              {/* Navigation Footer */}
               <div className="bg-[#1e2436] p-4 border-t border-[#272e48] flex justify-between items-center">
                 <Button 
                   variant="outline" 
