@@ -106,9 +106,9 @@ const AIAgents = () => {
             ))}
           </div>
           
-          {/* Agent Numbers with Arrows - Placed directly below cards */}
+          {/* Agent Numbers with Arrows - Positioned directly under cards */}
           <motion.div 
-            className="relative flex justify-center items-center"
+            className="relative grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
             initial={{ opacity: 0, y: 20 }}
             animate={{ 
               opacity: 1, 
@@ -120,12 +120,12 @@ const AIAgents = () => {
               }
             }}
           >
-            <div className="flex items-center justify-center space-x-8 md:space-x-16 w-full">
-              {agents.map((agent, index) => (
-                <React.Fragment key={`flow-${index}`}>
+            {agents.map((agent, index) => (
+              <div key={`flow-${index}`} className="flex flex-col items-center">
+                <div className="flex items-center w-full">
                   {/* Agent Number */}
                   <motion.div 
-                    className="flex flex-col items-center"
+                    className="flex justify-center w-full"
                     initial={{ opacity: 1 }}
                     animate={{ 
                       opacity: activeAgent === index ? 0 : 1,
@@ -144,27 +144,33 @@ const AIAgents = () => {
                     >
                       <span className="text-sm font-bold">{index + 1}</span>
                     </motion.div>
+                    
+                    {/* Only render arrows between numbers, not after the last one */}
+                    {index < agents.length - 1 && (
+                      <motion.div
+                        className="absolute lg:block hidden"
+                        style={{ 
+                          left: `${(index + 1) * 25 - 3}%`,
+                          top: '50%',
+                          transform: 'translateY(-50%)'
+                        }}
+                        initial={{ opacity: 0.5 }}
+                        animate={{ 
+                          opacity: [0.5, 1, 0.5],
+                          transition: {
+                            duration: 2,
+                            repeat: Infinity,
+                            ease: "easeInOut"
+                          }
+                        }}
+                      >
+                        <ArrowRight className="text-primary/70" />
+                      </motion.div>
+                    )}
                   </motion.div>
-                  
-                  {/* Only render arrows between numbers, not after the last one */}
-                  {index < agents.length - 1 && (
-                    <motion.div
-                      initial={{ opacity: 0.5 }}
-                      animate={{ 
-                        opacity: [0.5, 1, 0.5],
-                        transition: {
-                          duration: 2,
-                          repeat: Infinity,
-                          ease: "easeInOut"
-                        }
-                      }}
-                    >
-                      <ArrowRight className="text-primary/70" />
-                    </motion.div>
-                  )}
-                </React.Fragment>
-              ))}
-            </div>
+                </div>
+              </div>
+            ))}
           </motion.div>
         </div>
       </div>

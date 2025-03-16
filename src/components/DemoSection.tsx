@@ -195,11 +195,11 @@ All test cases passed!`
             score: 4,
             comment: "Appropriate for intermediate level."
           },
-          educationalValue: {
+          education: {
             score: 5,
             comment: "Teaches fundamental hash table usage."
           },
-          testCoverage: {
+          coverage: {
             score: 5,
             comment: "Comprehensive test cases including edge cases."
           },
@@ -421,14 +421,29 @@ Recommendations:
                       <div className="space-y-6">
                         <div className="space-y-4">
                           <h4 className="font-medium">Problem Quality Assessment:</h4>
-                          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                          <div className="grid grid-cols-2 gap-4">
                             {Object.entries(demoSteps[3].problem.quality).slice(0, 4).map(([key, value]) => {
                               if (typeof value === 'object' && value.score !== undefined) {
+                                let badgeColor = "";
+                                if (value.score === 5) badgeColor = "bg-green-100 text-green-800 border-green-200";
+                                else if (value.score === 4) badgeColor = "bg-blue-100 text-blue-800 border-blue-200";
+                                else if (value.score === 3) badgeColor = "bg-yellow-100 text-yellow-800 border-yellow-200";
+                                else if (value.score === 2) badgeColor = "bg-orange-100 text-orange-800 border-orange-200";
+                                else badgeColor = "bg-red-100 text-red-800 border-red-200";
+                                
                                 return (
                                   <div key={key} className="p-3 bg-[#1d2335] rounded-md">
                                     <div className="flex justify-between items-center mb-2">
-                                      <span className="text-sm capitalize font-medium">{key}:</span>
-                                      {renderRatingBadge(value.score)}
+                                      <span className="text-sm capitalize font-medium">
+                                        {key === "education" ? "Education" : 
+                                         key === "coverage" ? "Coverage" : 
+                                         key.charAt(0).toUpperCase() + key.slice(1)}:
+                                      </span>
+                                      <div className="flex items-center">
+                                        <span className={`text-sm font-medium px-2 py-0.5 rounded ${badgeColor}`}>
+                                          {value.score}/5
+                                        </span>
+                                      </div>
                                     </div>
                                     <p className="text-xs text-slate-400">{value.comment}</p>
                                   </div>
