@@ -28,9 +28,9 @@ const Navbar = () => {
 
   const navLinks = [
     { name: 'Features', href: '#features' },
-    { name: 'AI Agents', href: '#ai-agents' },
-    { name: 'For Educators', href: '#for-educators' },
-    { name: 'For Developers', href: '#for-developers' },
+    { name: 'How It Works', href: '#how-it-works' },
+    { name: 'Our Solution', href: '#our-solution' },
+    { name: 'Demo', href: '#demo' },
   ];
 
   return (
@@ -70,12 +70,14 @@ const Navbar = () => {
         </div>
 
         <div className="hidden md:flex items-center space-x-4">
-          <Button variant="ghost" className="text-sm font-medium">
-            Sign In
+          <Button variant="ghost" className="text-sm font-medium" asChild>
+            <Link to="/sign-in">Sign In</Link>
           </Button>
-          <Button className="text-sm font-medium relative overflow-hidden group">
-            <span className="relative z-10">Get Started</span>
-            <span className="absolute inset-0 bg-gradient-to-r from-blue-500 to-blue-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+          <Button className="text-sm font-medium relative overflow-hidden group" asChild>
+            <Link to="/sign-in">
+              <span className="relative z-10">Get Started</span>
+              <span className="absolute inset-0 bg-gradient-to-r from-blue-500 to-blue-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+            </Link>
           </Button>
         </div>
 
@@ -107,11 +109,11 @@ const Navbar = () => {
               </a>
             ))}
             <div className="flex flex-col space-y-2 pt-4 border-t">
-              <Button variant="ghost" className="justify-start">
-                Sign In
+              <Button variant="ghost" className="justify-start" asChild>
+                <Link to="/sign-in" onClick={() => setIsMobileMenuOpen(false)}>Sign In</Link>
               </Button>
-              <Button>
-                Get Started
+              <Button asChild>
+                <Link to="/sign-in" onClick={() => setIsMobileMenuOpen(false)}>Get Started</Link>
               </Button>
             </div>
           </div>

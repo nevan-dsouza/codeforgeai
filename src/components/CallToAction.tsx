@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Check } from 'lucide-react';
 
@@ -57,12 +58,18 @@ const CallToAction = () => {
               </div>
               
               <div className="space-y-4">
-                <Button size="lg" className="w-full sm:w-auto relative overflow-hidden group">
-                  <span className="relative z-10 flex items-center">
-                    Get Started For Free
-                    <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform duration-200" size={18} />
-                  </span>
-                  <span className="absolute inset-0 bg-gradient-to-r from-blue-600 to-blue-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+                <Button 
+                  size="lg" 
+                  className="w-full sm:w-auto relative overflow-hidden group"
+                  asChild
+                >
+                  <Link to="/sign-in">
+                    <span className="relative z-10 flex items-center">
+                      Get Started For Free
+                      <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform duration-200" size={18} />
+                    </span>
+                    <span className="absolute inset-0 bg-gradient-to-r from-blue-600 to-blue-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+                  </Link>
                 </Button>
                 <p className="text-sm text-muted-foreground">
                   No credit card required. Free plan includes 10 problems per month.
@@ -99,10 +106,17 @@ const CallToAction = () => {
                 ))}
               </div>
               
-              <Button size="lg" variant="outline" className="w-full border-primary/20 hover:border-primary/40 hover:bg-primary/5">
-                <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-blue-400">
-                  View All Plans
-                </span>
+              <Button 
+                size="lg" 
+                variant="outline" 
+                className="w-full border-primary/20 hover:border-primary/40 hover:bg-primary/5"
+                asChild
+              >
+                <Link to="/sign-in">
+                  <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-blue-400">
+                    View All Plans
+                  </span>
+                </Link>
               </Button>
             </div>
           </div>

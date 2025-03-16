@@ -1,5 +1,5 @@
 
-import React, { useEffect } from 'react';
+import React from 'react';
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
 import AIAgents from '@/components/AIAgents';
@@ -10,34 +10,20 @@ import CallToAction from '@/components/CallToAction';
 import Footer from '@/components/Footer';
 
 const Index = () => {
-  useEffect(() => {
-    // Initial loading animation
-    const animateOnLoad = () => {
-      const sections = document.querySelectorAll('section');
-      sections.forEach((section, index) => {
-        setTimeout(() => {
-          section.classList.add('animate-fade-in');
-        }, index * 100);
-      });
-    };
-    
-    animateOnLoad();
-  }, []);
-
   return (
     <div className="min-h-screen bg-white overflow-x-hidden">
       <Navbar />
       <Hero />
-      <section id="ai-agents">
+      <section id="how-it-works">
         <AIAgents />
       </section>
       <section id="features">
         <Features />
       </section>
-      <section id="for-educators">
+      <section id="our-solution">
         <TargetAudience />
       </section>
-      <section id="for-developers">
+      <section id="demo">
         <DemoSection />
       </section>
       <CallToAction />
