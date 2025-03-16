@@ -77,7 +77,7 @@ const Features = () => {
           Streamline Your Problem Creation Workflow
         </h2>
         <p className="text-muted-foreground text-lg">
-          CodeForge AI does more than just generate problems—it transforms 
+          Kodey does more than just generate problems—it transforms 
           your entire workflow for maximum efficiency and quality.
         </p>
       </div>

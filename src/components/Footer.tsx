@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Github, Twitter, Linkedin, Mail } from 'lucide-react';
@@ -62,7 +63,7 @@ const Footer = () => {
             <Link to="/" className="flex items-center space-x-2 text-2xl font-bold mb-5">
               <div className="w-8 h-8 rounded-lg flex items-center justify-center">
                 <img 
-                  src="/lovable-uploads/5efd31e5-2a5a-4761-b43e-25e4262d13f7.png" 
+                  src="/lovable-uploads/5c0a5ac9-bc94-4f56-8291-d2c2c29b3115.png" 
                   alt="Kodey Logo" 
                   className="w-8 h-8"
                 />

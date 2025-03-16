@@ -50,7 +50,7 @@ const Navbar = () => {
         >
           <div className="w-10 h-10 rounded-lg flex items-center justify-center">
             <img 
-              src="/lovable-uploads/5efd31e5-2a5a-4761-b43e-25e4262d13f7.png" 
+              src="/lovable-uploads/5c0a5ac9-bc94-4f56-8291-d2c2c29b3115.png" 
               alt="Kodey Logo" 
               className="w-10 h-10"
             />

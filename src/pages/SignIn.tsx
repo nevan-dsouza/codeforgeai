@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -82,11 +81,15 @@ const SignIn = () => {
             </Link>
           </Button>
           <Link to="/" className="flex items-center gap-2 mb-6 mx-auto w-fit">
-            <div className="w-10 h-10 rounded-lg bg-primary flex items-center justify-center">
-              <span className="text-white font-bold">CF</span>
+            <div className="w-10 h-10 rounded-lg flex items-center justify-center">
+              <img 
+                src="/lovable-uploads/5c0a5ac9-bc94-4f56-8291-d2c2c29b3115.png" 
+                alt="Kodey Logo" 
+                className="w-10 h-10"
+              />
             </div>
             <span className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-blue-400">
-              CodeForge
+              Kodey
             </span>
           </Link>
         </div>
@@ -183,7 +186,7 @@ const SignIn = () => {
               <CardHeader>
                 <CardTitle>Create an account</CardTitle>
                 <CardDescription>
-                  Sign up to get started with CodeForge
+                  Sign up to get started with Kodey
                 </CardDescription>
               </CardHeader>
               <CardContent>
