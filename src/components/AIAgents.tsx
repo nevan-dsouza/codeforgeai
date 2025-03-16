@@ -9,9 +9,11 @@ import {
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import AIAgentCard from './AIAgentCard';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 const AIAgents = () => {
   const [activeAgent, setActiveAgent] = useState<number | null>(null);
+  const isMobile = useIsMobile();
   
   const handleCardClick = (index: number) => {
     setActiveAgent(activeAgent === index ? null : index);
@@ -88,63 +90,65 @@ const AIAgents = () => {
         </div>
         
         <div className="space-y-14">
-          {/* Agent Numbers with Arrows - Positioned ABOVE cards */}
-          <motion.div 
-            className="relative grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ 
-              opacity: 1, 
-              y: 0,
-              transition: { 
-                duration: 0.5, 
-                delay: 0.2,
-                ease: "easeOut" 
-              }
-            }}
-          >
-            {agents.map((agent, index) => (
-              <div key={`flow-${index}`} className="flex flex-col items-center">
-                <div className="flex items-center justify-center w-full relative mb-4">
-                  {/* Agent Number */}
-                  <motion.div 
-                    className="w-12 h-12 rounded-full flex items-center justify-center text-white cursor-pointer"
-                    style={{ backgroundColor: agent.color }}
-                    whileHover={{ 
-                      scale: 1.1,
-                      boxShadow: "0 0 15px rgba(0,0,0,0.1)",
-                      transition: { duration: 0.3 }
-                    }}
-                    onClick={() => handleCardClick(index)}
-                  >
-                    <span className="text-sm font-bold">{index + 1}</span>
-                  </motion.div>
-                  
-                  {/* Only render arrows between numbers, not after the last one */}
-                  {index < agents.length - 1 && (
-                    <motion.div
-                      className="absolute lg:block hidden"
-                      style={{ 
-                        left: '100%',
-                        top: '50%',
-                        transform: 'translateY(-50%)'
+          {/* Agent Numbers with Arrows - Only shown on desktop */}
+          {!isMobile && (
+            <motion.div 
+              className="relative grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ 
+                opacity: 1, 
+                y: 0,
+                transition: { 
+                  duration: 0.5, 
+                  delay: 0.2,
+                  ease: "easeOut" 
+                }
+              }}
+            >
+              {agents.map((agent, index) => (
+                <div key={`flow-${index}`} className="flex flex-col items-center">
+                  <div className="flex items-center justify-center w-full relative mb-4">
+                    {/* Agent Number */}
+                    <motion.div 
+                      className="w-12 h-12 rounded-full flex items-center justify-center text-white cursor-pointer"
+                      style={{ backgroundColor: agent.color }}
+                      whileHover={{ 
+                        scale: 1.1,
+                        boxShadow: "0 0 15px rgba(0,0,0,0.1)",
+                        transition: { duration: 0.3 }
                       }}
-                      initial={{ opacity: 0.5 }}
-                      animate={{ 
-                        opacity: [0.5, 1, 0.5],
-                        transition: {
-                          duration: 2,
-                          repeat: Infinity,
-                          ease: "easeInOut"
-                        }
-                      }}
+                      onClick={() => handleCardClick(index)}
                     >
-                      <ArrowRight className="text-primary/70" />
+                      <span className="text-sm font-bold">{index + 1}</span>
                     </motion.div>
-                  )}
+                    
+                    {/* Only render arrows between numbers, not after the last one */}
+                    {index < agents.length - 1 && (
+                      <motion.div
+                        className="absolute lg:block hidden"
+                        style={{ 
+                          left: '100%',
+                          top: '50%',
+                          transform: 'translateY(-50%)'
+                        }}
+                        initial={{ opacity: 0.5 }}
+                        animate={{ 
+                          opacity: [0.5, 1, 0.5],
+                          transition: {
+                            duration: 2,
+                            repeat: Infinity,
+                            ease: "easeInOut"
+                          }
+                        }}
+                      >
+                        <ArrowRight className="text-primary/70" />
+                      </motion.div>
+                    )}
+                  </div>
                 </div>
-              </div>
-            ))}
-          </motion.div>
+              ))}
+            </motion.div>
+          )}
           
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {agents.map((agent, index) => (
