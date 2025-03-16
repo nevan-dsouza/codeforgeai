@@ -102,27 +102,11 @@ const AIAgents = () => {
                   details={agent.details}
                   color={agent.color}
                 />
-                
-                {/* Agent Number - Placed directly below its card */}
-                <div className="flex justify-center mt-6">
-                  <motion.div 
-                    className="w-12 h-12 rounded-full flex items-center justify-center text-white cursor-pointer"
-                    style={{ backgroundColor: agent.color }}
-                    whileHover={{ 
-                      scale: 1.1,
-                      boxShadow: "0 0 15px rgba(0,0,0,0.1)",
-                      transition: { duration: 0.3 }
-                    }}
-                    onClick={() => handleCardClick(index)}
-                  >
-                    <span className="text-sm font-bold">{index + 1}</span>
-                  </motion.div>
-                </div>
               </div>
             ))}
           </div>
           
-          {/* Agent Flow Diagram - Show the arrows between the numbers */}
+          {/* Agent Numbers with Arrows - Placed directly below cards */}
           <motion.div 
             className="relative flex justify-center items-center"
             initial={{ opacity: 0, y: 20 }}
@@ -136,9 +120,32 @@ const AIAgents = () => {
               }
             }}
           >
-            <div className="flex items-center space-x-4 md:space-x-6">
-              {agents.map((_, index) => (
+            <div className="flex items-center justify-center space-x-8 md:space-x-16 w-full">
+              {agents.map((agent, index) => (
                 <React.Fragment key={`flow-${index}`}>
+                  {/* Agent Number */}
+                  <motion.div 
+                    className="flex flex-col items-center"
+                    initial={{ opacity: 1 }}
+                    animate={{ 
+                      opacity: activeAgent === index ? 0 : 1,
+                      transition: { duration: 0.3 }
+                    }}
+                  >
+                    <motion.div 
+                      className="w-12 h-12 rounded-full flex items-center justify-center text-white cursor-pointer"
+                      style={{ backgroundColor: agent.color }}
+                      whileHover={{ 
+                        scale: 1.1,
+                        boxShadow: "0 0 15px rgba(0,0,0,0.1)",
+                        transition: { duration: 0.3 }
+                      }}
+                      onClick={() => handleCardClick(index)}
+                    >
+                      <span className="text-sm font-bold">{index + 1}</span>
+                    </motion.div>
+                  </motion.div>
+                  
                   {/* Only render arrows between numbers, not after the last one */}
                   {index < agents.length - 1 && (
                     <motion.div

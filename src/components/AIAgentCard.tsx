@@ -46,7 +46,7 @@ const AIAgentCard: React.FC<AIAgentCardProps> = ({
       layoutId={`agent-card-${position}`}
       whileHover={!isActive ? { scale: 1.03, transition: { duration: 0.3 } } : {}}
       style={{ 
-        height: isActive ? 'auto' : undefined,
+        height: isActive ? 'auto' : '280px', // Fixed height when not active
         minHeight: '280px'
       }}
     >

@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { 
@@ -28,33 +27,25 @@ const DemoSection = () => {
     setIsPlaying(!isPlaying);
   };
   
-  // Helper function to render rating badges
   const renderRatingBadge = (score: number, maxScore: number = 5) => {
     let color;
-    let label;
     
-    // Determine color and label based on score
     if (score >= 4.5) {
       color = "bg-green-100 text-green-800 border-green-200";
-      label = "Excellent";
     } else if (score >= 4) {
       color = "bg-green-100 text-green-800 border-green-200";
-      label = "Very Good";
     } else if (score >= 3) {
       color = "bg-yellow-100 text-yellow-800 border-yellow-200";
-      label = "Good";
     } else if (score >= 2) {
       color = "bg-orange-100 text-orange-800 border-orange-200";
-      label = "Fair";
     } else {
       color = "bg-red-100 text-red-800 border-red-200";
-      label = "Poor";
     }
     
     return (
       <div className="flex items-center">
         <span className={`text-sm font-medium px-2 py-0.5 rounded ${color}`}>
-          {score}/{maxScore} - {label}
+          {score}/{maxScore}
         </span>
       </div>
     );
@@ -430,7 +421,7 @@ Recommendations:
                       <div className="space-y-6">
                         <div className="space-y-4">
                           <h4 className="font-medium">Problem Quality Assessment:</h4>
-                          <div className="grid grid-cols-1 gap-4">
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             {Object.entries(demoSteps[3].problem.quality).slice(0, 4).map(([key, value]) => {
                               if (typeof value === 'object' && value.score !== undefined) {
                                 return (
