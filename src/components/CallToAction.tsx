@@ -30,7 +30,7 @@ const CallToAction = () => {
               </h2>
               <p className="text-lg mb-8 text-muted-foreground">
                 Join thousands of educators, recruiters, and developers who have 
-                streamlined their workflow with CodeForge AI.
+                streamlined their workflow with Kodey.
               </p>
               
               <div className="mb-8">

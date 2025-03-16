@@ -38,7 +38,7 @@ const Hero = () => {
       <div className="container px-6 md:px-12 mx-auto max-w-7xl relative z-10">
         <div className="flex flex-col items-center text-center mb-16 stagger-container">
           <div className="chip bg-primary/10 text-primary mb-6 animate-bounce-in">
-            Introducing CodeForge AI
+            Introducing Kodey
           </div>
           
           <h1 className="font-bold mb-6 max-w-4xl">
@@ -90,7 +90,7 @@ const Hero = () => {
               <div className="flex items-center space-x-4">
                 <div className="text-blue-400 font-semibold text-lg flex items-center">
                   <Code className="mr-2" size={20} />
-                  <span>CodeForge</span>
+                  <span>Kodey</span>
                 </div>
                 <div className="hidden md:flex space-x-4 text-gray-300 text-sm">
                   <span className="cursor-pointer hover:text-white">Problems</span>

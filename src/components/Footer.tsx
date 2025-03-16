@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Github, Twitter, Linkedin, Mail } from 'lucide-react';
+import { Github, Twitter, Linkedin, Mail, Fox } from 'lucide-react';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -61,11 +61,15 @@ const Footer = () => {
         <div className="grid grid-cols-2 lg:grid-cols-5 gap-8 mb-12">
           <div className="col-span-2 lg:col-span-1">
             <Link to="/" className="flex items-center space-x-2 text-2xl font-bold mb-5">
-              <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center">
-                <span className="text-white font-bold text-sm">CF</span>
+              <div className="w-8 h-8 rounded-lg flex items-center justify-center">
+                <img 
+                  src="/lovable-uploads/5efd31e5-2a5a-4761-b43e-25e4262d13f7.png" 
+                  alt="Kodey Logo" 
+                  className="w-8 h-8"
+                />
               </div>
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-blue-400">
-                CodeForge
+                Kodey
               </span>
             </Link>
             <p className="text-muted-foreground text-sm mb-6 max-w-xs">
@@ -106,7 +110,7 @@ const Footer = () => {
         
         <div className="pt-8 border-t border-slate-200 flex flex-col md:flex-row justify-between items-center">
           <p className="text-sm text-muted-foreground mb-4 md:mb-0">
-            &copy; {currentYear} CodeForge AI. All rights reserved.
+            &copy; {currentYear} Kodey. All rights reserved.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <a href="#" className="text-xs text-muted-foreground hover:text-primary transition-colors duration-200">

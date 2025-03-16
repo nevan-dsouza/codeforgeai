@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Fox } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 
@@ -48,11 +48,15 @@ const Navbar = () => {
           className="flex items-center space-x-2 text-2xl font-bold"
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
         >
-          <div className="w-10 h-10 rounded-lg bg-primary flex items-center justify-center">
-            <span className="text-white font-bold">CF</span>
+          <div className="w-10 h-10 rounded-lg flex items-center justify-center">
+            <img 
+              src="/lovable-uploads/5efd31e5-2a5a-4761-b43e-25e4262d13f7.png" 
+              alt="Kodey Logo" 
+              className="w-10 h-10"
+            />
           </div>
           <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-blue-400">
-            CodeForge
+            Kodey
           </span>
         </Link>
 
