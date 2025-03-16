@@ -89,19 +89,11 @@ const AIAgents = () => {
         
         <LayoutGroup>
           <motion.div 
-            className="grid gap-6 mb-12"
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12"
             layout
             transition={{ 
               layout: { duration: 0.6, ease: "easeInOut" },
               opacity: { duration: 0.3 }
-            }}
-            style={{
-              display: "grid",
-              gridTemplateColumns: activeAgent !== null
-                ? "1fr"
-                : "repeat(4, 1fr)",
-              maxWidth: "100%",
-              margin: "0 auto"
             }}
           >
             {agents.map((agent, index) => (

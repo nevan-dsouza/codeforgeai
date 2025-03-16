@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { 
@@ -11,10 +12,10 @@ import {
   Lightbulb,
   CheckCircle2,
   Terminal,
-  ArrowLeft,
-  Star
+  ArrowLeft
 } from 'lucide-react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Badge } from "@/components/ui/badge";
 import { cn } from '@/lib/utils';
 
 const DemoSection = () => {
@@ -25,6 +26,38 @@ const DemoSection = () => {
   
   const togglePlayback = () => {
     setIsPlaying(!isPlaying);
+  };
+  
+  // Helper function to render rating badges
+  const renderRatingBadge = (score: number, maxScore: number = 5) => {
+    let color;
+    let label;
+    
+    // Determine color and label based on score
+    if (score >= 4.5) {
+      color = "bg-green-100 text-green-800 border-green-200";
+      label = "Excellent";
+    } else if (score >= 4) {
+      color = "bg-green-100 text-green-800 border-green-200";
+      label = "Very Good";
+    } else if (score >= 3) {
+      color = "bg-yellow-100 text-yellow-800 border-yellow-200";
+      label = "Good";
+    } else if (score >= 2) {
+      color = "bg-orange-100 text-orange-800 border-orange-200";
+      label = "Fair";
+    } else {
+      color = "bg-red-100 text-red-800 border-red-200";
+      label = "Poor";
+    }
+    
+    return (
+      <div className="flex items-center">
+        <span className={`text-sm font-medium px-2 py-0.5 rounded ${color}`}>
+          {score}/{maxScore} - {label}
+        </span>
+      </div>
+    );
   };
   
   const demoSteps = [
@@ -192,22 +225,6 @@ Recommendations:
       }
     }
   ];
-  
-  const renderQualityStars = (score: number) => {
-    return (
-      <div className="flex">
-        {[...Array(5)].map((_, i) => (
-          <Star
-            key={i}
-            size={16}
-            className={`${
-              i < score ? 'text-yellow-400 fill-yellow-400' : 'text-gray-300'
-            } mr-0.5`}
-          />
-        ))}
-      </div>
-    );
-  };
   
   return (
     <section className="py-20 px-6 md:px-12 bg-gradient-to-b from-white to-blue-50">
@@ -413,14 +430,14 @@ Recommendations:
                       <div className="space-y-6">
                         <div className="space-y-4">
                           <h4 className="font-medium">Problem Quality Assessment:</h4>
-                          <div className="grid grid-cols-2 gap-4">
+                          <div className="grid grid-cols-1 gap-4">
                             {Object.entries(demoSteps[3].problem.quality).slice(0, 4).map(([key, value]) => {
                               if (typeof value === 'object' && value.score !== undefined) {
                                 return (
                                   <div key={key} className="p-3 bg-[#1d2335] rounded-md">
-                                    <div className="flex justify-between items-center mb-1">
-                                      <span className="text-sm capitalize">{key}:</span>
-                                      {renderQualityStars(value.score)}
+                                    <div className="flex justify-between items-center mb-2">
+                                      <span className="text-sm capitalize font-medium">{key}:</span>
+                                      {renderRatingBadge(value.score)}
                                     </div>
                                     <p className="text-xs text-slate-400">{value.comment}</p>
                                   </div>

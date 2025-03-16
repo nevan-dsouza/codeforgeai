@@ -67,15 +67,15 @@ const Hero = () => {
           </div>
         </div>
 
-        {/* Stats/Chips */}
+        {/* Stats/Chips - Updated for uniform height */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mb-20">
           {[
-            { icon: <Code size={18} />, text: "10,000+ Problems Generated" },
-            { icon: <Brain size={18} />, text: "4 Specialized AI Agents" },
+            { icon: <Code size={18} />, text: "10,000+ Problems" },
+            { icon: <Brain size={18} />, text: "4 AI Agents" },
             { icon: <Zap size={18} />, text: "95% Accuracy Rate" },
             { icon: <Star size={18} />, text: "Used by Top Companies" }
           ].map((item, index) => (
-            <div key={index} className="glass rounded-xl p-4 flex items-center justify-center gap-2 text-sm md:text-base animate-fade-in" style={{ animationDelay: `${index * 0.1}s` }}>
+            <div key={index} className="glass rounded-xl p-4 flex items-center justify-center gap-2 text-sm md:text-base animate-fade-in h-14" style={{ animationDelay: `${index * 0.1}s` }}>
               <span className="text-primary">{item.icon}</span>
               <span className="font-medium">{item.text}</span>
             </div>

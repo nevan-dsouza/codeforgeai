@@ -6,7 +6,16 @@ import {
   Briefcase, 
   Code, 
   ChevronRight, 
-  Check
+  Check,
+  BookOpen,
+  Users,
+  FileText,
+  Network,
+  Award,
+  GanttChart,
+  Search,
+  BadgeCheck,
+  BarChart
 } from 'lucide-react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { cn } from '@/lib/utils';
@@ -17,14 +26,14 @@ const AudienceTab = ({
   title, 
   description, 
   benefits, 
-  imageSrc 
+  mockUI
 }: { 
   id: string; 
   icon: React.ReactNode; 
   title: string; 
   description: string; 
   benefits: string[]; 
-  imageSrc: string;
+  mockUI: React.ReactNode;
 }) => {
   return (
     <TabsContent 
@@ -60,37 +69,7 @@ const AudienceTab = ({
         </div>
         
         <div className="relative rounded-xl overflow-hidden shadow-xl">
-          <div className="aspect-[4/3] bg-gradient-to-br from-blue-50 to-slate-100">
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="w-5/6 glass rounded-lg border border-white/30 shadow-lg overflow-hidden">
-                {/* Mock UI based on the audience */}
-                <div className="bg-slate-800 h-10 flex items-center px-4">
-                  <div className="flex space-x-2">
-                    <div className="w-2.5 h-2.5 rounded-full bg-red-400"></div>
-                    <div className="w-2.5 h-2.5 rounded-full bg-yellow-400"></div>
-                    <div className="w-2.5 h-2.5 rounded-full bg-green-400"></div>
-                  </div>
-                </div>
-                <div className="p-4 bg-white">
-                  <div className="space-y-4">
-                    <div className="w-2/3 h-5 bg-slate-200 rounded"></div>
-                    <div className="space-y-2">
-                      <div className="w-full h-3 bg-slate-200 rounded"></div>
-                      <div className="w-full h-3 bg-slate-200 rounded"></div>
-                      <div className="w-3/4 h-3 bg-slate-200 rounded"></div>
-                    </div>
-                    <div className="grid grid-cols-2 gap-3">
-                      <div className="h-24 bg-slate-100 rounded"></div>
-                      <div className="h-24 bg-slate-100 rounded"></div>
-                    </div>
-                    <div className="flex justify-end">
-                      <div className="w-24 h-8 bg-blue-500 rounded"></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          {mockUI}
         </div>
       </div>
     </TabsContent>
@@ -111,7 +90,59 @@ const TargetAudience = () => {
         "Provide detailed feedback to students with solution explanations",
         "Scale your course materials effortlessly for any class size"
       ],
-      imageSrc: "/placeholder.svg"
+      mockUI: (
+        <div className="aspect-[4/3] bg-gradient-to-br from-blue-50 to-slate-100">
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="w-5/6 glass rounded-lg border border-white/30 shadow-lg overflow-hidden">
+              {/* Educator UI mockup */}
+              <div className="bg-slate-800 h-10 flex items-center px-4">
+                <div className="flex space-x-2">
+                  <div className="w-2.5 h-2.5 rounded-full bg-red-400"></div>
+                  <div className="w-2.5 h-2.5 rounded-full bg-yellow-400"></div>
+                  <div className="w-2.5 h-2.5 rounded-full bg-green-400"></div>
+                </div>
+                <div className="ml-4 text-white text-xs">Course Manager</div>
+              </div>
+              <div className="p-4 bg-white">
+                <div className="flex items-center mb-4">
+                  <BookOpen size={16} className="text-blue-500 mr-2" />
+                  <div className="text-sm font-medium">Data Structures 101</div>
+                </div>
+                <div className="space-y-3 mb-4">
+                  <div className="flex justify-between items-center pb-2 border-b">
+                    <div className="text-xs font-medium">Assignment Generator</div>
+                    <div className="text-xs text-blue-500">+ New</div>
+                  </div>
+                  <div className="p-2 bg-blue-50 rounded-md">
+                    <div className="text-xs font-medium mb-1">Assignment #3: Trees</div>
+                    <div className="flex justify-between text-xs text-gray-500">
+                      <span>15 problems</span>
+                      <span>Due: Oct 15</span>
+                    </div>
+                  </div>
+                  <div className="grid grid-cols-2 gap-2">
+                    <div className="bg-green-50 p-2 rounded text-xs">
+                      <div className="font-medium text-green-700">Easy (5)</div>
+                    </div>
+                    <div className="bg-yellow-50 p-2 rounded text-xs">
+                      <div className="font-medium text-yellow-700">Medium (7)</div>
+                    </div>
+                    <div className="bg-red-50 p-2 rounded text-xs">
+                      <div className="font-medium text-red-700">Hard (3)</div>
+                    </div>
+                    <div className="bg-purple-50 p-2 rounded text-xs">
+                      <div className="font-medium text-purple-700">+ Custom</div>
+                    </div>
+                  </div>
+                </div>
+                <div className="flex justify-end">
+                  <div className="bg-blue-500 text-white text-xs px-3 py-1 rounded">Generate</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )
     },
     {
       id: "recruiters",
@@ -125,7 +156,62 @@ const TargetAudience = () => {
         "Evaluate candidates against comprehensive test cases automatically",
         "Reduce time spent on interview preparation by 70%"
       ],
-      imageSrc: "/placeholder.svg"
+      mockUI: (
+        <div className="aspect-[4/3] bg-gradient-to-br from-purple-50 to-slate-100">
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="w-5/6 glass rounded-lg border border-white/30 shadow-lg overflow-hidden">
+              {/* Recruiter UI mockup */}
+              <div className="bg-slate-800 h-10 flex items-center px-4">
+                <div className="flex space-x-2">
+                  <div className="w-2.5 h-2.5 rounded-full bg-red-400"></div>
+                  <div className="w-2.5 h-2.5 rounded-full bg-yellow-400"></div>
+                  <div className="w-2.5 h-2.5 rounded-full bg-green-400"></div>
+                </div>
+                <div className="ml-4 text-white text-xs">Interview Portal</div>
+              </div>
+              <div className="p-4 bg-white">
+                <div className="flex items-center mb-4 justify-between">
+                  <div className="flex items-center">
+                    <Users size={16} className="text-indigo-500 mr-2" />
+                    <div className="text-sm font-medium">Candidate Assessment</div>
+                  </div>
+                  <div className="text-xs px-2 py-1 bg-blue-100 text-blue-700 rounded-full">Senior Dev</div>
+                </div>
+                <div className="space-y-3 mb-4">
+                  <div className="flex justify-between items-center">
+                    <div className="text-xs font-medium">Interview Challenge Pack</div>
+                    <Search size={14} className="text-gray-400" />
+                  </div>
+                  <div className="flex gap-2 mb-2">
+                    <div className="bg-blue-100 text-blue-700 px-2 py-0.5 rounded-full text-xs">Frontend</div>
+                    <div className="bg-gray-100 text-gray-700 px-2 py-0.5 rounded-full text-xs">React</div>
+                    <div className="bg-gray-100 text-gray-700 px-2 py-0.5 rounded-full text-xs">TypeScript</div>
+                  </div>
+                  <div className="space-y-2">
+                    <div className="flex items-center justify-between p-2 border-l-2 border-indigo-500 bg-indigo-50 rounded-r-md">
+                      <div>
+                        <div className="text-xs font-medium">UI Component Architecture</div>
+                        <div className="text-xs text-gray-500">Medium · 45 min</div>
+                      </div>
+                      <BadgeCheck size={16} className="text-indigo-500" />
+                    </div>
+                    <div className="flex items-center justify-between p-2 border-l-2 border-indigo-200 bg-gray-50 rounded-r-md">
+                      <div>
+                        <div className="text-xs font-medium">API Data Fetching Challenge</div>
+                        <div className="text-xs text-gray-500">Hard · 60 min</div>
+                      </div>
+                      <div className="w-4 h-4 rounded-full border border-gray-300"></div>
+                    </div>
+                  </div>
+                </div>
+                <div className="flex justify-end">
+                  <div className="bg-indigo-500 text-white text-xs px-3 py-1 rounded">Send to Candidate</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )
     },
     {
       id: "developers",
@@ -139,7 +225,59 @@ const TargetAudience = () => {
         "Receive detailed explanations and optimal solutions for learning",
         "Track your progress with comprehensive performance analytics"
       ],
-      imageSrc: "/placeholder.svg"
+      mockUI: (
+        <div className="aspect-[4/3] bg-gradient-to-br from-green-50 to-slate-100">
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="w-5/6 glass rounded-lg border border-white/30 shadow-lg overflow-hidden">
+              {/* Developer UI mockup */}
+              <div className="bg-slate-800 h-10 flex items-center px-4">
+                <div className="flex space-x-2">
+                  <div className="w-2.5 h-2.5 rounded-full bg-red-400"></div>
+                  <div className="w-2.5 h-2.5 rounded-full bg-yellow-400"></div>
+                  <div className="w-2.5 h-2.5 rounded-full bg-green-400"></div>
+                </div>
+                <div className="ml-4 text-white text-xs">Developer Dashboard</div>
+              </div>
+              <div className="p-4 bg-white">
+                <div className="flex items-center mb-4">
+                  <BarChart size={16} className="text-green-500 mr-2" />
+                  <div className="text-sm font-medium">Your Progress</div>
+                </div>
+                <div className="mb-3">
+                  <div className="flex justify-between text-xs mb-1">
+                    <span>Skill Level: Algorithms</span>
+                    <span className="font-medium">73%</span>
+                  </div>
+                  <div className="w-full h-2 bg-gray-100 rounded-full overflow-hidden">
+                    <div className="h-full bg-green-500 rounded-full" style={{ width: '73%' }}></div>
+                  </div>
+                </div>
+                <div className="grid grid-cols-2 gap-2 mb-4">
+                  <div className="bg-blue-50 p-2 rounded text-xs">
+                    <div className="font-medium">Recommended</div>
+                    <div className="text-blue-700 mt-1">Graph Traversal</div>
+                  </div>
+                  <div className="bg-green-50 p-2 rounded text-xs">
+                    <div className="font-medium">Completed</div>
+                    <div className="text-green-700 mt-1">47 problems</div>
+                  </div>
+                  <div className="bg-yellow-50 p-2 rounded text-xs">
+                    <div className="font-medium">Streak</div>
+                    <div className="text-yellow-700 mt-1">7 days</div>
+                  </div>
+                  <div className="bg-purple-50 p-2 rounded text-xs">
+                    <div className="font-medium">Next Goal</div>
+                    <div className="text-purple-700 mt-1">Dynamic Prog.</div>
+                  </div>
+                </div>
+                <div className="flex justify-end">
+                  <div className="bg-green-500 text-white text-xs px-3 py-1 rounded">Practice Now</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )
     }
   ];
 
@@ -156,20 +294,22 @@ const TargetAudience = () => {
       </div>
       
       <Tabs defaultValue="educators" className="w-full">
-        <TabsList className="w-full bg-muted/50 p-1 grid grid-cols-1 sm:grid-cols-3 gap-1 mb-8">
-          {audiences.map(audience => (
-            <TabsTrigger 
-              key={audience.id}
-              value={audience.id}
-              className="py-3 data-[state=active]:bg-white data-[state=active]:shadow-sm"
-            >
-              <div className="flex items-center">
-                <div className="mr-2">{audience.icon}</div>
-                <span>For {audience.title}</span>
-              </div>
-            </TabsTrigger>
-          ))}
-        </TabsList>
+        <div className="w-full">
+          <TabsList className="w-full h-auto bg-muted/50 grid grid-cols-1 sm:grid-cols-3 mb-8">
+            {audiences.map(audience => (
+              <TabsTrigger 
+                key={audience.id}
+                value={audience.id}
+                className="py-3 data-[state=active]:bg-white data-[state=active]:shadow-sm"
+              >
+                <div className="flex items-center">
+                  <div className="mr-2">{audience.icon}</div>
+                  <span>For {audience.title}</span>
+                </div>
+              </TabsTrigger>
+            ))}
+          </TabsList>
+        </div>
         
         {audiences.map(audience => (
           <AudienceTab 
@@ -179,7 +319,7 @@ const TargetAudience = () => {
             title={audience.title}
             description={audience.description}
             benefits={audience.benefits}
-            imageSrc={audience.imageSrc}
+            mockUI={audience.mockUI}
           />
         ))}
       </Tabs>
