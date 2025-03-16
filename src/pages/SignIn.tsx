@@ -6,58 +6,69 @@ import { Input } from '@/components/ui/input';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
-import { useToast } from '@/components/ui/use-toast';
 import { ArrowLeft, Mail, Lock, Github, Twitter } from 'lucide-react';
+import { useAuth } from '@/contexts/AuthContext';
+import { useToast } from '@/components/ui/use-toast';
 
 const SignIn = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [signInEmail, setSignInEmail] = useState('');
+  const [signInPassword, setSignInPassword] = useState('');
+  const [signUpEmail, setSignUpEmail] = useState('');
+  const [signUpPassword, setSignUpPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  
   const navigate = useNavigate();
+  const { signIn, signUp, signInWithProvider } = useAuth();
   const { toast } = useToast();
 
-  const handleSignIn = (e: React.FormEvent) => {
+  const handleSignIn = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
 
-    // Simulate authentication process
-    setTimeout(() => {
-      setIsLoading(false);
-      toast({
-        title: "Sign in successful",
-        description: "Welcome back to CodeForge!",
-      });
+    try {
+      await signIn(signInEmail, signInPassword);
       navigate('/');
-    }, 1500);
+    } catch (error) {
+      console.error('Sign in error:', error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
-  const handleSignUp = (e: React.FormEvent) => {
+  const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
 
-    // Simulate registration process
-    setTimeout(() => {
-      setIsLoading(false);
+    if (signUpPassword !== confirmPassword) {
       toast({
-        title: "Account created",
-        description: "Welcome to CodeForge! Your account has been created successfully.",
+        title: "Passwords don't match",
+        description: "Please make sure your passwords match.",
+        variant: "destructive",
       });
-      navigate('/');
-    }, 1500);
+      setIsLoading(false);
+      return;
+    }
+
+    try {
+      await signUp(signUpEmail, signUpPassword);
+      // We don't navigate here as user needs to confirm email first
+    } catch (error) {
+      console.error('Sign up error:', error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
-  const handleSocialSignIn = (provider: string) => {
+  const handleSocialSignIn = async (provider: 'github' | 'twitter') => {
     setIsLoading(true);
-
-    // Simulate social authentication
-    setTimeout(() => {
+    try {
+      await signInWithProvider(provider);
+      // No navigation needed as OAuth will handle redirect
+    } catch (error) {
+      console.error(`${provider} sign in error:`, error);
       setIsLoading(false);
-      toast({
-        title: `Sign in with ${provider} successful`,
-        description: "Welcome to CodeForge!",
-      });
-      navigate('/');
-    }, 1500);
+    }
   };
 
   return (
@@ -105,8 +116,8 @@ const SignIn = () => {
                         type="email"
                         placeholder="you@example.com"
                         className="pl-10"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
+                        value={signInEmail}
+                        onChange={(e) => setSignInEmail(e.target.value)}
                         required
                       />
                     </div>
@@ -125,8 +136,8 @@ const SignIn = () => {
                         type="password"
                         placeholder="••••••••"
                         className="pl-10"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
+                        value={signInPassword}
+                        onChange={(e) => setSignInPassword(e.target.value)}
                         required
                       />
                     </div>
@@ -146,11 +157,19 @@ const SignIn = () => {
                 </div>
 
                 <div className="grid grid-cols-2 gap-4">
-                  <Button variant="outline" onClick={() => handleSocialSignIn('GitHub')} disabled={isLoading}>
+                  <Button 
+                    variant="outline" 
+                    onClick={() => handleSocialSignIn('github')} 
+                    disabled={isLoading}
+                  >
                     <Github className="mr-2 h-4 w-4" />
                     GitHub
                   </Button>
-                  <Button variant="outline" onClick={() => handleSocialSignIn('Twitter')} disabled={isLoading}>
+                  <Button 
+                    variant="outline" 
+                    onClick={() => handleSocialSignIn('twitter')} 
+                    disabled={isLoading}
+                  >
                     <Twitter className="mr-2 h-4 w-4" />
                     Twitter
                   </Button>
@@ -178,6 +197,8 @@ const SignIn = () => {
                         type="email"
                         placeholder="you@example.com"
                         className="pl-10"
+                        value={signUpEmail}
+                        onChange={(e) => setSignUpEmail(e.target.value)}
                         required
                       />
                     </div>
@@ -191,6 +212,8 @@ const SignIn = () => {
                         type="password"
                         placeholder="••••••••"
                         className="pl-10"
+                        value={signUpPassword}
+                        onChange={(e) => setSignUpPassword(e.target.value)}
                         required
                       />
                     </div>
@@ -204,6 +227,8 @@ const SignIn = () => {
                         type="password"
                         placeholder="••••••••"
                         className="pl-10"
+                        value={confirmPassword}
+                        onChange={(e) => setConfirmPassword(e.target.value)}
                         required
                       />
                     </div>
@@ -223,11 +248,19 @@ const SignIn = () => {
                 </div>
 
                 <div className="grid grid-cols-2 gap-4">
-                  <Button variant="outline" onClick={() => handleSocialSignIn('GitHub')} disabled={isLoading}>
+                  <Button 
+                    variant="outline" 
+                    onClick={() => handleSocialSignIn('github')} 
+                    disabled={isLoading}
+                  >
                     <Github className="mr-2 h-4 w-4" />
                     GitHub
                   </Button>
-                  <Button variant="outline" onClick={() => handleSocialSignIn('Twitter')} disabled={isLoading}>
+                  <Button 
+                    variant="outline" 
+                    onClick={() => handleSocialSignIn('twitter')} 
+                    disabled={isLoading}
+                  >
                     <Twitter className="mr-2 h-4 w-4" />
                     Twitter
                   </Button>
