@@ -29,7 +29,7 @@ const AIAgentCard: React.FC<AIAgentCardProps> = ({
   return (
     <motion.div 
       className={cn(
-        "relative p-6 rounded-xl transition-all duration-500 cursor-pointer overflow-hidden h-full flex flex-col",
+        "relative p-6 rounded-xl transition-all duration-500 cursor-pointer overflow-hidden",
         isActive 
           ? "bg-white border-2 border-primary shadow-lg z-20" 
           : "bg-white border border-border hover:border-primary/20 shadow-card"
@@ -42,9 +42,13 @@ const AIAgentCard: React.FC<AIAgentCardProps> = ({
         delay: position * 0.1,
         ease: "easeOut"
       }}
-      layout
+      layout="position"
       layoutId={`agent-card-${position}`}
       whileHover={!isActive ? { scale: 1.03, transition: { duration: 0.3 } } : {}}
+      style={{ 
+        height: isActive ? 'auto' : undefined,
+        minHeight: '280px'
+      }}
     >
       <motion.div 
         className={cn(

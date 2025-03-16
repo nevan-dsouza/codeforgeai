@@ -7,7 +7,7 @@ import {
   Sparkles, 
   ArrowRight
 } from 'lucide-react';
-import { motion, AnimatePresence, LayoutGroup } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import AIAgentCard from './AIAgentCard';
 
 const AIAgents = () => {
@@ -87,52 +87,26 @@ const AIAgents = () => {
           </p>
         </div>
         
-        <LayoutGroup>
-          <motion.div 
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-20"
-            layout
-            transition={{ 
-              layout: { duration: 0.6, ease: "easeInOut" },
-              opacity: { duration: 0.3 }
-            }}
-          >
+        <div className="space-y-16">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {agents.map((agent, index) => (
-              <AIAgentCard
-                key={index}
-                icon={agent.icon}
-                title={agent.title}
-                description={agent.description}
-                isActive={activeAgent === index}
-                onClick={() => handleCardClick(index)}
-                position={index}
-                details={agent.details}
-                color={agent.color}
-              />
-            ))}
-          </motion.div>
-        </LayoutGroup>
-        
-        {/* Agent Flow Diagram - Show always regardless of active agent */}
-        <motion.div 
-          className="mt-8 relative"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ 
-            opacity: 1, 
-            y: 0,
-            transition: { 
-              duration: 0.5, 
-              delay: 0.2,
-              ease: "easeOut" 
-            }
-          }}
-        >
-          <div className="flex justify-center items-center space-x-4 md:space-x-10">
-            {agents.map((agent, index) => (
-              <React.Fragment key={index}>
-                {/* Agent Number */}
-                <div className="flex flex-col items-center">
+              <div key={`agent-container-${index}`} className="flex flex-col">
+                <AIAgentCard
+                  key={index}
+                  icon={agent.icon}
+                  title={agent.title}
+                  description={agent.description}
+                  isActive={activeAgent === index}
+                  onClick={() => handleCardClick(index)}
+                  position={index}
+                  details={agent.details}
+                  color={agent.color}
+                />
+                
+                {/* Agent Number - Placed directly below its card */}
+                <div className="flex justify-center mt-6">
                   <motion.div 
-                    className="w-12 h-12 rounded-full flex items-center justify-center mb-2 text-white cursor-pointer"
+                    className="w-12 h-12 rounded-full flex items-center justify-center text-white cursor-pointer"
                     style={{ backgroundColor: agent.color }}
                     whileHover={{ 
                       scale: 1.1,
@@ -144,27 +118,48 @@ const AIAgents = () => {
                     <span className="text-sm font-bold">{index + 1}</span>
                   </motion.div>
                 </div>
-                
-                {/* Arrow between numbers */}
-                {index < agents.length - 1 && (
-                  <motion.div
-                    initial={{ opacity: 0.5 }}
-                    animate={{ 
-                      opacity: [0.5, 1, 0.5],
-                      transition: {
-                        duration: 2,
-                        repeat: Infinity,
-                        ease: "easeInOut"
-                      }
-                    }}
-                  >
-                    <ArrowRight className="text-primary/70" />
-                  </motion.div>
-                )}
-              </React.Fragment>
+              </div>
             ))}
           </div>
-        </motion.div>
+          
+          {/* Agent Flow Diagram - Show the arrows between the numbers */}
+          <motion.div 
+            className="relative flex justify-center items-center"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ 
+              opacity: 1, 
+              y: 0,
+              transition: { 
+                duration: 0.5, 
+                delay: 0.2,
+                ease: "easeOut" 
+              }
+            }}
+          >
+            <div className="flex items-center space-x-4 md:space-x-6">
+              {agents.map((_, index) => (
+                <React.Fragment key={`flow-${index}`}>
+                  {/* Only render arrows between numbers, not after the last one */}
+                  {index < agents.length - 1 && (
+                    <motion.div
+                      initial={{ opacity: 0.5 }}
+                      animate={{ 
+                        opacity: [0.5, 1, 0.5],
+                        transition: {
+                          duration: 2,
+                          repeat: Infinity,
+                          ease: "easeInOut"
+                        }
+                      }}
+                    >
+                      <ArrowRight className="text-primary/70" />
+                    </motion.div>
+                  )}
+                </React.Fragment>
+              ))}
+            </div>
+          </motion.div>
+        </div>
       </div>
     </section>
   );
