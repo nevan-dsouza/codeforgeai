@@ -28,10 +28,18 @@ const Index = () => {
     <div className="min-h-screen bg-white overflow-x-hidden">
       <Navbar />
       <Hero />
-      <AIAgents />
-      <Features />
-      <TargetAudience />
-      <DemoSection />
+      <section id="ai-agents">
+        <AIAgents />
+      </section>
+      <section id="features">
+        <Features />
+      </section>
+      <section id="for-educators">
+        <TargetAudience />
+      </section>
+      <section id="for-developers">
+        <DemoSection />
+      </section>
       <CallToAction />
       <Footer />
     </div>

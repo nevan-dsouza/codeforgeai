@@ -28,9 +28,9 @@ const Navbar = () => {
 
   const navLinks = [
     { name: 'Features', href: '#features' },
-    { name: 'For Educators', href: '#educators' },
-    { name: 'For Recruiters', href: '#recruiters' },
-    { name: 'For Developers', href: '#developers' },
+    { name: 'AI Agents', href: '#ai-agents' },
+    { name: 'For Educators', href: '#for-educators' },
+    { name: 'For Developers', href: '#for-developers' },
   ];
 
   return (
