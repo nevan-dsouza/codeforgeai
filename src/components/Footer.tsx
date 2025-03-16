@@ -61,11 +61,11 @@ const Footer = () => {
         <div className="grid grid-cols-2 lg:grid-cols-5 gap-8 mb-12">
           <div className="col-span-2 lg:col-span-1">
             <Link to="/" className="flex items-center space-x-2 text-2xl font-bold mb-5">
-              <div className="w-8 h-8 rounded-lg flex items-center justify-center">
+              <div className="w-10 h-10 rounded-lg flex items-center justify-center">
                 <img 
                   src="/lovable-uploads/5c0a5ac9-bc94-4f56-8291-d2c2c29b3115.png" 
                   alt="Kodey Logo" 
-                  className="w-8 h-8"
+                  className="w-10 h-10"
                 />
               </div>
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-blue-400">
