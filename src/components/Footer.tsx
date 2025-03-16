@@ -58,8 +58,8 @@ const Footer = () => {
   return (
     <footer className="bg-slate-50 pt-16 pb-8 border-t border-slate-200">
       <div className="container px-6 md:px-12 mx-auto max-w-7xl">
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-8 mb-12">
-          <div className="col-span-2">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12">
+          <div className="col-span-2 md:col-span-1">
             <Link to="/" className="flex items-center space-x-2 text-2xl font-bold mb-5">
               <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center">
                 <span className="text-white font-bold text-sm">CF</span>
@@ -86,7 +86,7 @@ const Footer = () => {
           </div>
           
           {footerLinks.map((section, sectionIndex) => (
-            <div key={sectionIndex} className={sectionIndex === 3 ? "col-span-1" : "col-span-1"}>
+            <div key={sectionIndex} className="col-span-1">
               <h3 className="font-medium mb-4">{section.title}</h3>
               <ul className="space-y-3">
                 {section.links.map((link, linkIndex) => (
