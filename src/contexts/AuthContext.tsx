@@ -10,7 +10,7 @@ interface AuthContextType {
   isLoading: boolean;
   signIn: (email: string, password: string) => Promise<void>;
   signUp: (email: string, password: string) => Promise<void>;
-  signInWithProvider: (provider: 'github' | 'twitter') => Promise<void>;
+  signInWithProvider: (provider: 'github' | 'twitter' | 'google') => Promise<void>;
   signOut: () => Promise<void>;
 }
 
@@ -64,7 +64,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       
       toast({
         title: 'Signed in successfully',
-        description: 'Welcome back to CodeForge!',
+        description: 'Welcome back to Kodey!',
       });
     } catch (error) {
       console.error('Sign in error:', error);
@@ -95,7 +95,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
-  const signInWithProvider = async (provider: 'github' | 'twitter') => {
+  const signInWithProvider = async (provider: 'github' | 'twitter' | 'google') => {
     try {
       const { error } = await supabase.auth.signInWithOAuth({ 
         provider,

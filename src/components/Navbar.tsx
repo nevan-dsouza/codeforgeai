@@ -45,14 +45,14 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         <Link 
           to="/" 
-          className="flex items-center space-x-3 text-2xl font-bold"
+          className="flex items-center space-x-4 text-2xl font-bold"
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
         >
-          <div className="w-12 h-12 rounded-lg flex items-center justify-center">
+          <div className="w-16 h-16 rounded-lg flex items-center justify-center">
             <img 
               src="/lovable-uploads/5c0a5ac9-bc94-4f56-8291-d2c2c29b3115.png" 
               alt="Kodey Logo" 
-              className="w-12 h-12"
+              className="w-16 h-16"
             />
           </div>
           <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-blue-400">
