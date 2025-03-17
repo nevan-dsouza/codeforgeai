@@ -82,11 +82,11 @@ const SignIn = () => {
             </Link>
           </Button>
           <Link to="/" className="flex items-center gap-3 mb-6 mx-auto w-fit">
-            <div className="w-16 h-16 rounded-lg flex items-center justify-center">
+            <div className="w-20 h-20 rounded-lg flex items-center justify-center">
               <img 
                 src="/lovable-uploads/5c0a5ac9-bc94-4f56-8291-d2c2c29b3115.png" 
                 alt="Kodey Logo" 
-                className="w-16 h-16"
+                className="w-20 h-20"
               />
             </div>
             <span className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-blue-400">

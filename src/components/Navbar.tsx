@@ -48,11 +48,11 @@ const Navbar = () => {
           className="flex items-center space-x-4 text-2xl font-bold"
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
         >
-          <div className="w-16 h-16 rounded-lg flex items-center justify-center">
+          <div className="w-20 h-20 rounded-lg flex items-center justify-center">
             <img 
               src="/lovable-uploads/5c0a5ac9-bc94-4f56-8291-d2c2c29b3115.png" 
               alt="Kodey Logo" 
-              className="w-16 h-16"
+              className="w-20 h-20"
             />
           </div>
           <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-blue-400">

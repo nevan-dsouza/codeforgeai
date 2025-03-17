@@ -65,7 +65,7 @@ const CallToAction = () => {
                 >
                   <Link to="/sign-in">
                     <span className="relative z-10 flex items-center">
-                      Get Started For Free
+                      Get Started
                       <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform duration-200" size={18} />
                     </span>
                     <span className="absolute inset-0 bg-gradient-to-r from-blue-600 to-blue-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>

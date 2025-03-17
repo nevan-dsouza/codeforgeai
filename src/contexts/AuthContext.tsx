@@ -97,10 +97,14 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const signInWithProvider = async (provider: 'github' | 'twitter' | 'google') => {
     try {
+      // Get the current origin for the redirect URL
+      const redirectTo = `${window.location.origin}/`;
+      console.log('Redirecting to:', redirectTo);
+      
       const { error } = await supabase.auth.signInWithOAuth({ 
         provider,
         options: {
-          redirectTo: `${window.location.origin}/`,
+          redirectTo: redirectTo,
         },
       });
       
